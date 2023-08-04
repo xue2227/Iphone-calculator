@@ -18,10 +18,13 @@ class Calculator {
     }
   }
 
-
   appendNumber(number) {
     if (this.currentOperand === "0") {
-      this.currentOperand = number.toString();
+      if (number === ".") {
+        this.currentOperand = "0.";
+      } else {
+        this.currentOperand = number.toString();
+      }
     } else if (number === "." && this.currentOperand.includes(".")) {
       return;
     } else {
@@ -65,9 +68,32 @@ class Calculator {
     this.previousOperand = "";
   }
 
+  getDisplayNumber(number) {
+    const stringNumber = number.toString();
+    const integerDigits = parseFloat(stringNumber.split("."[0]));
+    const decimalDigits = stringNumber.split(".")[1];
+    let integerDisplay;
+    if (isNaN(integerDigits)) {
+      integerDisplay = "";
+    } else {
+      integerDisplay = integerDigits.toLocaleString("en", {
+        maximumFractionDigits: 0,
+      });
+    }
+    if (decimalDigits != null) {
+      return `${integerDisplay}.${decimalDigits}`;
+    } else {
+      return integerDisplay;
+    }
+  }
+
   updateDisplay() {
-    this.currentOperandTextElement.innerText = this.currentOperand;
-    this.previousOperandTextElement.innerText = this.previousOperand;
+    this.currentOperandTextElement.innerText = this.getDisplayNumber(
+      this.currentOperand
+    );
+    this.previousOperandTextElement.innerText = this.getDisplayNumber(
+      this.previousOperand
+    );
   }
 }
 

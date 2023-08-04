@@ -83,11 +83,11 @@ body {
 
 .output .previous-operand{
   color: rgba(255, 255, 255, 0.7);
-  font-size: 3rem;
+  font-size: 2rem;
   margin-bottom: -10px;
 }
 
 .output .current-operand{
   color: rgb(255, 255, 255);
-  font-size: 4.5rem;
+  font-size: 4rem;
 }
